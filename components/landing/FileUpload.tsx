@@ -1,7 +1,15 @@
 "use client";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-const FileUpload = () => {
+const FileUpload = ({
+	setData,
+	setUploaded,
+}: {
+	setData: (data: object) => void;
+	setUploaded: (uploaded: boolean) => void;
+}) => {
 	const [file, setFile] = useState<File | null>(null);
 
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,8 +30,9 @@ const FileUpload = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				// TODO: Handle the response from the Flask backend
 				console.log("API response: ", data);
+				setData(data);
+				setUploaded(true);
 			})
 			.catch((error) => {
 				console.error("Error uploading file:", error);
@@ -32,13 +41,8 @@ const FileUpload = () => {
 
 	return (
 		<div className="mt-8">
-			<input type="file" onChange={handleFileChange} />
-			<button
-				onClick={handleUpload}
-				className="bg-black hover:bg-slate-900 rounded text-white font-bold py-2 px-4 mt-4"
-			>
-				Upload Data
-			</button>
+			<Input type="file" onChange={handleFileChange} className="cursor-pointer" />
+			<Button onClick={handleUpload} className="mt-4">Upload Data</Button>
 		</div>
 	);
 };

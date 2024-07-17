@@ -1,24 +1,15 @@
-import Image from "next/image";
-import FileUpload from "./FileUpload";
+"use client";
+import { useState } from "react";
+import Landing from "../components/landing/Landing";
+import Results from "@/components/results/Results";
 
 export default function Home() {
+	const [uploaded, setUploaded] = useState<boolean>(false);
+	const [data, setData] = useState<object>({});
+
 	return (
-		<main className="border rounded-xl px-4 my-4 py-4">
-			<h1 className="text-2xl font-semibold mb-4 mt-4">
-				Credit Card Wrapped
-			</h1>
-			<p className="text-lg text-gray-600 mb-4">
-				Your credit card transaction history wrapped
-			</p>
-			<Image
-				src="/cc-wrapped.png"
-				alt="Credit Card"
-				className="rounded-xl"
-				width={400}
-				height={400}
-				priority
-			/>
-			<FileUpload />
-		</main>
+		<>
+			{uploaded ? <Results data={data}/> : <Landing setData={setData} setUploaded={setUploaded} />}
+		</>
 	);
 }
