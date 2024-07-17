@@ -2,12 +2,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { DataFormat } from "@/lib/interfaces";
 
 const FileUpload = ({
 	setData,
 	setUploaded,
 }: {
-	setData: (data: object) => void;
+	setData: (data: DataFormat) => void;
 	setUploaded: (uploaded: boolean) => void;
 }) => {
 	const [file, setFile] = useState<File | null>(null);
@@ -20,7 +21,6 @@ const FileUpload = ({
 	const handleUpload = () => {
 		const formData = new FormData();
 		if (file) {
-			console.log("file uploaded: ", file);
 			formData.append("file", file);
 		}
 
@@ -30,7 +30,6 @@ const FileUpload = ({
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log("API response: ", data);
 				setData(data);
 				setUploaded(true);
 			})

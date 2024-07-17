@@ -13,16 +13,11 @@ import {
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
-	CardHeader,
-	CardTitle,
 } from "@/components/ui/card";
 import {
 	ChartConfig,
 	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
 } from "@/components/ui/chart";
 
 const chartConfig = {
@@ -39,23 +34,29 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-export default function BChart({ chartData} : { chartData: Array<any> }) {
+export default function BChart({ chartData }: { chartData: Array<any> }) {
+	const yAxisDataKey = "day";
+	const xAxisDataKey = "amount";
+
 	return (
 		<Card className="w-full">
 			<CardContent>
-				<ChartContainer config={chartConfig} className="min-h-[250px] w-full">
+				<ChartContainer
+					config={chartConfig}
+					className="min-h-[250px] w-full"
+				>
 					<BarChart
 						accessibilityLayer
 						data={chartData}
 						layout="vertical"
 						margin={{
 							right: 16,
-                            top: 16,
+							top: 16,
 						}}
 					>
 						<CartesianGrid horizontal={false} />
 						<YAxis
-							dataKey="day"
+							dataKey={yAxisDataKey}
 							type="category"
 							tickLine={false}
 							tickMargin={10}
@@ -63,22 +64,22 @@ export default function BChart({ chartData} : { chartData: Array<any> }) {
 							tickFormatter={(value) => value.slice(0, 3)}
 							hide
 						/>
-						<XAxis dataKey="amount" type="number" hide />
+						<XAxis dataKey={xAxisDataKey} type="number" hide />
 						<Bar
-							dataKey="amount"
+							dataKey={xAxisDataKey}
 							layout="vertical"
 							fill="var(--color-desktop)"
 							radius={4}
 						>
 							<LabelList
-								dataKey="day"
+								dataKey={yAxisDataKey}
 								position="insideLeft"
 								offset={8}
 								className="fill-[--color-label]"
 								fontSize={12}
 							/>
 							<LabelList
-								dataKey="amount"
+								dataKey={xAxisDataKey}
 								position="right"
 								offset={8}
 								className="fill-foreground"

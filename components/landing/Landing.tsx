@@ -1,7 +1,8 @@
 import Image from "next/image";
 import FileUpload from "./FileUpload";
+import { DataFormat } from "@/lib/interfaces";
 
-export default function Landing({setData, setUploaded} : {setData: (data: object) => void, setUploaded: (uploaded: boolean) => void}){
+export default function Landing({setData, setUploaded} : {setData: (data: DataFormat) => void, setUploaded: (uploaded: boolean) => void}){
     return(
         <main className="border rounded-xl px-4 my-4 py-4">
 			<h1 className="text-2xl font-semibold mb-4 mt-4">

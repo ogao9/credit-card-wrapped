@@ -8,13 +8,8 @@ from analysis import get_analysis
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/api/python")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-
 @app.route('/api/upload', methods=['POST'])
-def upload_file():
+def handle_upload():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
 
@@ -22,8 +17,6 @@ def upload_file():
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
     
-    print("file: ", file)
-
     # Process the uploaded file
     data = file.read()
 
@@ -34,6 +27,6 @@ def upload_file():
     file_obj = StringIO(data_str)
 
     df = pd.read_csv(file_obj)
-    analysis = get_analysis(df)
+    analysis_obj = get_analysis(df)
 
-    return jsonify({"msg" : "file uploaded successfully"})
+    return jsonify(analysis_obj)
