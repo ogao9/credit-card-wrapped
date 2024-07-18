@@ -24,7 +24,7 @@ const FileUpload = ({
 			formData.append("file", file);
 		}
 
-		fetch("/api/upload", {
+		fetch("https://cc-wrapped-api.onrender.com/api/upload", {
 			method: "POST",
 			body: formData,
 		})
@@ -34,6 +34,7 @@ const FileUpload = ({
 				setUploaded(true);
 			})
 			.catch((error) => {
+				// TODO: might need to retry because API goes to sleep with inactivity
 				console.error("Error uploading file:", error);
 			});
 	};
