@@ -4,7 +4,7 @@ import { DataFormat } from "@/lib/interfaces";
 
 export default function Landing({setData, setUploaded} : {setData: (data: DataFormat) => void, setUploaded: (uploaded: boolean) => void}){
     return(
-        <main className="border rounded-xl px-4 my-4 py-4">
+        <main className="p-4 my-4">
 			<h1 className="text-2xl font-semibold mb-4 mt-4">
 				Credit Card Wrapped
 			</h1>
@@ -13,10 +13,10 @@ export default function Landing({setData, setUploaded} : {setData: (data: DataFo
 			</p>
 			<Image
 				src="/cc-wrapped.png"
-				alt="Credit Card"
+				alt="Credit card and data abstract illustration"
 				className="rounded-xl"
-				width={400}
-				height={400}
+				width={384}
+				height={384}
 				priority
 			/>
 			<FileUpload setData={setData} setUploaded={setUploaded}/>

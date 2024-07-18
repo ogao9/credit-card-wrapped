@@ -41,6 +41,7 @@ const FileUpload = ({
 	return (
 		<div className="mt-8">
 			<Input type="file" onChange={handleFileChange} className="cursor-pointer" />
+			<p className="ml-2 mt-1 text-xs text-slate-700">Files supported: CSV</p>
 			<Button onClick={handleUpload} className="mt-4">Upload Data</Button>
 		</div>
 	);
