@@ -1,4 +1,4 @@
-export default function StackedSingleBarChart({ data }: { data: Array<any> }) {
+export default function SingleStackedBarChart({ data }: { data: Array<any> }) {
 	const colors = ["#d64933", "#F4F1BB", "#0c7c59", "#58a4b0", "#bac1b8"];
 	let accum = 0;
 
@@ -10,19 +10,20 @@ export default function StackedSingleBarChart({ data }: { data: Array<any> }) {
 					const height = value * 4;
 					accum += height;
 
+					const showPercentage = value > 10;
+
 					return (
-						<>
+						<g key={i}>
 							<rect
 								x={0}
 								y={y}
 								width="100%"
 								height={height}
 								fill={colors[i]}
-								key={i}
 							/>
 							<text
 								x="50%"
-								y={y + height / 2}
+								y={y + height / 3}
 								dominantBaseline="middle"
 								textAnchor="middle"
 								fill="black"
@@ -31,7 +32,20 @@ export default function StackedSingleBarChart({ data }: { data: Array<any> }) {
 							>
 								{category}
 							</text>
-						</>
+							{showPercentage && (
+							<text
+								x="50%"
+								y={y + height / 3 + 20}
+								dominantBaseline="middle"
+								textAnchor="middle"
+								fill="black"
+								fontSize="12px"
+								fontWeight="semibold"
+							>
+								{value}%
+							</text>
+							)}
+						</g>
 					);
 				})}
 			</svg>

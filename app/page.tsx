@@ -10,7 +10,11 @@ export default function Home() {
 
 	return (
 		<>
-			{uploaded ? <Results data={data}/> : <Landing setData={setData} setUploaded={setUploaded} />}
+			{uploaded ? (
+				<Results data={data} />
+			) : (
+				<Landing setData={setData} setUploaded={setUploaded} />
+			)}
 		</>
 	);
 }

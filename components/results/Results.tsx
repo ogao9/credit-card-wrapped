@@ -1,8 +1,8 @@
 "use client";
 import { Slider } from "@/components/ui/slider";
-import BChart from "./DayOfWeekBarChart";
+import DayOfWeekBarChart from "./DayOfWeekBarChart";
 import CarouselCards from "./CarouselCards";
-import StackedSingleBarChart from "./SingleStackedBarChart";
+import SingleStackedBarChart from "./SingleStackedBarChart";
 import SimpleTable from "./SimpleTable";
 import { DataFormat } from "@/lib/interfaces";
 
@@ -21,7 +21,7 @@ const Intro = ({ data }: { data: string }) => {
 				Credit Card Wrapped
 			</h1>
 			<p className="text-center">
-				Here's how you spent {data}.
+				{data}
 			</p>
 		</PageContainer>
 	);
@@ -34,7 +34,7 @@ const Page1 = ({ data }: { data: Array<any> }) => {
 				Let's break down your top spending categories
 			</h1>
 			<div className="w-full">
-				<StackedSingleBarChart data={data} />
+				<SingleStackedBarChart data={data} />
 			</div>
 		</PageContainer>
 	);
@@ -46,7 +46,7 @@ const Page2 = ({ data }: { data: Array<object> }) => {
 			<h1 className="text-2xl font-semibold py-5">
 				This is how you spent on each day of the week
 			</h1>
-			<BChart chartData={data} />
+			<DayOfWeekBarChart chartData={data} />
 
 			{/* <div className="mt-4">
 				<p className="mb-2">Choose the data included in this chart</p>
@@ -71,9 +71,9 @@ const Page4 = ({ data }: { data: Array<any>  }) => {
 	return (
 		<PageContainer>
 			<h1 className="text-2xl font-semibold py-5">
-				The places you swiped your credit card the most
+				The places you frequented the most
 			</h1>
-			<SimpleTable data={data} />
+			<SimpleTable data={data} header={["Merchant", "Frequency"]} />
 		</PageContainer>
 	);
 };
@@ -85,7 +85,7 @@ const Page5 = ({ data }: { data: Array<any> }) => {
 	return (
 		<PageContainer>
 			<h1 className="text-2xl font-semibold pt-12">
-				You spent the most on {date} when ${amount} came out of your
+				You spent the most on {date} when {amount} came out of your
 				pocket.
 			</h1>
 		</PageContainer>
@@ -96,9 +96,9 @@ const Page6 = ({ data }: { data: Array<any> }) => {
 	return (
 		<PageContainer>
 			<h1 className="text-2xl font-semibold py-5">
-				The places you spent the most money
+				The places you spent the most
 			</h1>
-			<SimpleTable data={data} />
+			<SimpleTable data={data} header={["Merchant", "Amount"]} />
 		</PageContainer>
 	);
 };

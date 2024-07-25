@@ -11,7 +11,7 @@ import { DataFormat } from "@/lib/interfaces";
 
 export default function CarouselCards({ pages, data }: { pages: Array<any>, data: DataFormat }) {
 	const dataArray = [
-		"in 2023",
+		data["intro"],
 		data["top_categories"],
 		data["days_of_week_spend"],
 		data["num_places_spent"],

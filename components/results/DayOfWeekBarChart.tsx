@@ -34,9 +34,13 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-export default function BChart({ chartData }: { chartData: Array<any> }) {
+export default function DayOfWeekBarChart({ chartData }: { chartData: Array<any> }) {
 	const yAxisDataKey = "day";
 	const xAxisDataKey = "amount";
+
+	// Find the max amount spent
+	const maxAmount = Math.max(...chartData.map((item) => item.amount));
+	const maxAmountDay = chartData.find((item) => item.amount === maxAmount).day;
 
 	return (
 		<Card className="w-full">
@@ -50,7 +54,7 @@ export default function BChart({ chartData }: { chartData: Array<any> }) {
 						data={chartData}
 						layout="vertical"
 						margin={{
-							right: 16,
+							right: 40,
 							top: 16,
 						}}
 					>
@@ -90,12 +94,9 @@ export default function BChart({ chartData }: { chartData: Array<any> }) {
 				</ChartContainer>
 			</CardContent>
 			<CardFooter className="flex-col items-start gap-2 text-sm">
-				<div className="flex gap-2 font-medium leading-none">
-					You spent the most on Monday
+				<div className="flex gap-2 font-medium">
+					You spent the most on {maxAmountDay}, spending a total of ${maxAmount}!
 					<TrendingUp className="h-4 w-4" />
-				</div>
-				<div className="leading-none text-muted-foreground">
-					On average, you spent $200 every Monday
 				</div>
 			</CardFooter>
 		</Card>

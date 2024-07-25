@@ -1,4 +1,5 @@
 export interface DataFormat {
+	intro: string;
 	top_categories: Array<Array<string|number>>;
 	days_of_week_spend: Array<object>;
 	num_places_spent: number;

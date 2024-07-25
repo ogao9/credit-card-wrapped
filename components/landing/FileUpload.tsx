@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataFormat } from "@/lib/interfaces";
+import fetchRetry from "./FetchRetry";
 
 const FileUpload = ({
 	setData,
@@ -24,26 +25,34 @@ const FileUpload = ({
 			formData.append("file", file);
 		}
 
-		fetch("https://cc-wrapped-api.onrender.com/api/upload", {
-			method: "POST",
-			body: formData,
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				setData(data);
-				setUploaded(true);
+		try {
+			fetchRetry("https://cc-wrapped-api.onrender.com/api/upload", {
+				method: "POST",
+				body: formData,
 			})
-			.catch((error) => {
-				// TODO: might need to retry because API goes to sleep with inactivity
-				console.error("Error uploading file:", error);
-			});
+				.then((response) => response.json())
+				.then((data) => {
+					setData(data);
+					setUploaded(true);
+				});
+		} catch (err) {
+			console.error("Error uploading file: ", err);
+		}
 	};
 
 	return (
-		<div className="mt-8">
-			<Input type="file" onChange={handleFileChange} className="cursor-pointer" />
-			<p className="ml-2 mt-1 text-xs text-slate-700">Files supported: CSV</p>
-			<Button onClick={handleUpload} className="mt-4">Upload Data</Button>
+		<div className="mt-6">
+			<Input
+				type="file"
+				onChange={handleFileChange}
+				className="cursor-pointer"
+			/>
+			<p className="ml-2 mt-1 text-xs text-slate-700">
+				Files supported: CSV
+			</p>
+			<Button onClick={handleUpload} disabled={file===null} className="mt-4">
+				Upload Data
+			</Button>
 		</div>
 	);
 };

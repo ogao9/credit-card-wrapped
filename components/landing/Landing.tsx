@@ -19,6 +19,7 @@ export default function Landing({setData, setUploaded} : {setData: (data: DataFo
 				height={384}
 				priority
 			/>
+			<p className="mt-2">Currently, only transaction history from Discover credit cards is supported. Chase will be added soon.</p>
 			<FileUpload setData={setData} setUploaded={setUploaded}/>
 		</main>
     )
